@@ -1,0 +1,31 @@
+import { copy, readdirSync, removeSync, remove, copySync, readFileSync, writeFileSync, existsSync } from 'fs-extra';
+import { join, parse, relative, dirname } from 'path';
+import hash from 'hash-sum';
+declare type Obj = {
+    [key in string]: any;
+};
+export declare const DEMO_REGEXP: RegExp;
+export declare const TEST_REGEXP: RegExp;
+export declare const VUE_REGEXP: RegExp;
+export declare const JS_REGEXP: RegExp;
+export declare const STYLE_REGEXP: RegExp;
+export declare const EXT_REGEXP: RegExp;
+export declare const STYLE_IMPOPRTS: RegExp;
+export declare const JS_IMPOPRTS: RegExp;
+export declare function isDef(v: any): boolean;
+export declare function isObject(v: any): boolean;
+export declare function isDir(path: string): boolean;
+export declare function isTestDir(path: string): boolean;
+export declare function isDemoDir(path: string): boolean;
+export declare function isVue(path: string): boolean;
+export declare function isJs(path: string): boolean;
+export declare function isStyle(path: string): boolean;
+export declare function replaceExt(path: string, ext: string): string;
+export declare function replace(str: string, fn: {
+    (v: string): string;
+}): string;
+export declare function getConfig(options: Obj, path: string): any;
+export declare function getFullPath(path: string): string;
+export declare function translateStyleImports(text: string): string;
+export declare function translateJsImports(text: string): string;
+export { copy, copySync, readdirSync, readFileSync, remove, removeSync, join, hash, writeFileSync, parse, relative, existsSync, dirname };
