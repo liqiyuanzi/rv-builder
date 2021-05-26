@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import Commander from 'commander';
-import { support } from './build'
+import { support } from './command'
 import setAlias from './alias'
 
 type Obj = { [ key in string ]: boolean }
@@ -16,8 +16,9 @@ setAlias()
 
 program
 .option( '-e, --esm' )
-.option( '-u, --umd' )
+.option( '-cl, --clean' )
 .option( '-c, --cjs' )
+.option( '-h, --help' )
 .action( ( options: Obj ) => {
     for( let type in support ) {
         (
