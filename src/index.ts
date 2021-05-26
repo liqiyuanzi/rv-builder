@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import Commander from 'commander';
 import { support } from './build'
 import setAlias from './alias'
