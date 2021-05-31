@@ -7,12 +7,12 @@ import chalk from 'chalk';
 const fileChange = ( path: string ): void => {
     const distPath = path.replace( SRC_DIR, DIST_DIR );
     copySync( path, distPath );
-    compileFile( distPath );
+    compileFile( distPath );//eslint-disable-line
 };
 
 const addDir = ( path: string ): void => {
     copySync( path, DIST_DIR );
-    compileDir( path );
+    compileDir( path );//eslint-disable-line
 };
 
 const removeFile = ( path: string ): void => {
@@ -20,7 +20,7 @@ const removeFile = ( path: string ): void => {
     const srcPath = dirname( path );
     removeSync( distPath );
     copySync( srcPath, distPath );
-    compileDir( distPath );
+    compileDir( distPath );//eslint-disable-line
 };
 
 export default function watch(): void {

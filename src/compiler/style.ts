@@ -1,6 +1,6 @@
 import { parse } from 'path';
 import compileLess from './less';
-import { replaceExt, writeFileSync, remove } from '../common';
+import { replaceExt, writeFileSync } from '../common';
 
 const compilersMaps = {
     '.less' : compileLess
@@ -22,5 +22,4 @@ export default async function compileStyle( filePath: string ): Promise<void> {
     const css = await compileFile( filePath );
 
     writeFileSync( replaceExt( filePath, '.css' ), css );
-    remove( filePath );//eslint-disable-line
 }
