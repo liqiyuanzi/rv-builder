@@ -1,6 +1,6 @@
 {
   "name": "rv-builder",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "vue or react build tool",
   "main": "lib/index.js",
   "repository": "git@github.com:liqiyuanzi/rv-builder.git",
