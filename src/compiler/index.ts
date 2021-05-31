@@ -13,13 +13,13 @@ import {
     remove
 } from '../common';
 
-async function compileFile( filepath: string ): Promise<void> {
+export async function compileFile( filepath: string ): Promise<void> {
     if( isVue( filepath ) ) return compileVue( filepath );
     if( isJs( filepath ) ) return compileJS( filepath );
     if( isStyle( filepath ) ) return compileStyle( filepath );
 }
 
-async function compileDir( dir: string ): Promise<void> {
+export async function compileDir( dir: string ): Promise<void> {
     const files = readdirSync( dir );
 
     await Promise.all( files.map( async ( path: string ) => {
@@ -31,7 +31,3 @@ async function compileDir( dir: string ): Promise<void> {
         return compileFile( filepath );
     } ) );
 }
-
-export {
-    compileDir
-};

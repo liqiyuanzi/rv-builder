@@ -1,30 +1,29 @@
 #!/usr/bin/env node
 
 import Commander from 'commander';
-import { support } from './command'
-import setAlias from './alias'
+import { support } from './command';
+import setAlias from './alias';
 
-type Obj = { [ key in string ]: boolean }
+type Obj = { [ key in string ]: boolean };
 
 const program = new Commander.Command();
 
 const shouldBuildAll = ( obj: Obj ): boolean => {
-    return Object.keys( obj ).length === 0
-}
+    return Object.keys( obj ).length === 0;
+};
 
-setAlias()
+setAlias();
 
 program
-.option( '-e, --esm' )
-.option( '-cl, --clean' )
-.option( '-c, --cjs' )
-.option( '-h, --help' )
-.action( ( options: Obj ) => {
-    for( let type in support ) {
-        (
-             shouldBuildAll( options ) 
-            || options[ type ] 
-        ) 
-        && support[ type as keyof typeof support ].call( null )
-    }
-} ).parse()
+    .option( '-w, --watch' )
+    .option( '-e, --esm' )
+    .option( '-a, --amd' )
+    .option( '-u, --umd' )
+    .option( '-c, --cjs' )
+    .option( '-cl, --clean' )
+    .option( '-h, --help' )
+    .action( ( options: Obj ) => {
+        for( const type in support ) {
+            ( shouldBuildAll( options ) || options[ type ] ) && support[ type as keyof typeof support ].call( null );
+        }
+    } ).parse();

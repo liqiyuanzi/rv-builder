@@ -1,4 +1,4 @@
-import { copy, readdirSync, removeSync, remove, copySync, readFileSync, writeFileSync, existsSync } from 'fs-extra';
+import { copy, readdirSync, removeSync, remove, copySync, copyFile, readFileSync, writeFileSync, existsSync } from 'fs-extra';
 import { join, parse, relative, dirname } from 'path';
 import hash from 'hash-sum';
 declare type Obj = {
@@ -28,4 +28,4 @@ export declare function getConfig(options: Obj, path: string): any;
 export declare function getFullPath(path: string): string;
 export declare function translateStyleImports(text: string): string;
 export declare function translateJsImports(text: string): string;
-export { copy, copySync, readdirSync, readFileSync, remove, removeSync, join, hash, writeFileSync, parse, relative, existsSync, dirname };
+export { copy, copySync, copyFile, readdirSync, readFileSync, remove, removeSync, join, hash, writeFileSync, parse, relative, existsSync, dirname };

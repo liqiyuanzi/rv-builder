@@ -1,13 +1,11 @@
 import { transform } from '@babel/core';
-import { readFileSync, parse, writeFileSync, replaceExt, removeSync, translateStyleImports, translateJsImports } from '../common';
+import { readFileSync, writeFileSync, replaceExt, removeSync, translateStyleImports, translateJsImports } from '../common';
 
 export default async function( filepath: string ): Promise<void> {
-    const { base } = parse( filepath );
-
     const code = readFileSync( filepath, 'utf8' );
 
     let result = transform( code, {
-        filename : base
+        filename : filepath
     } )?.code;
     if( !result ) return;
 

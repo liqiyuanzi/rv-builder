@@ -1,6 +1,6 @@
 const EXPORT = 'export default {';
 
-import { copy, readdirSync, removeSync, remove, copySync, lstatSync, readFileSync, writeFileSync, existsSync } from 'fs-extra';
+import { copy, readdirSync, removeSync, remove, copySync, copyFile, lstatSync, readFileSync, writeFileSync, existsSync } from 'fs-extra';
 import { sep, join, parse, relative, dirname } from 'path';
 import hash from 'hash-sum';
 
@@ -96,4 +96,4 @@ export function translateJsImports( text: string ): string {
     return text.replace( JS_IMPOPRTS, ( source, str ) => source.replace( str, 'js' ) );
 }
 
-export { copy, copySync, readdirSync, readFileSync, remove, removeSync, join, hash, writeFileSync, parse, relative, existsSync, dirname };
+export { copy, copySync, copyFile, readdirSync, readFileSync, remove, removeSync, join, hash, writeFileSync, parse, relative, existsSync, dirname };

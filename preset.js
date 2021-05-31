@@ -1,13 +1,13 @@
 module.exports = function() {
     const { RF_BUILDER_ENV, RF_BUILDER_ALIAS } = process.env;
-    const useESModules = RF_BUILDER_ENV !== 'cjs';
+    const buildType = RF_BUILDER_ENV ;
 
     const plugins = [
         [
             '@babel/plugin-transform-runtime',
             {
                 corejs : false,
-                useESModules,
+                useESModules: buildType === 'esm',
             },
         ],
         '@babel/plugin-transform-object-assign',
@@ -36,7 +36,7 @@ module.exports = function() {
                 '@babel/preset-env',
                 {
                     loose : true,
-                    modules : useESModules ? false : 'cjs',
+                    modules : buildType === 'esm' ? false : buildType,
                 },
             ],
             [
