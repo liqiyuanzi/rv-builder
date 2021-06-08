@@ -4,7 +4,7 @@ import * as templateCompiler from 'vue-template-compiler';
 import { readFileSync, hash, replaceExt, writeFileSync, parse as parsePath, replace, remove } from '../common';
 import { RENDER_FN, STATIC_RENDER_FN } from '../common/constant';
 import compileJs from './js';
-import cs from './style';
+import compileStyles from './style';
 
 type SFCDescriptorOutput = SFCDescriptor & { source: string };
 
@@ -17,7 +17,7 @@ const createScopedId = ( str: string ): string => {
 };
 
 const getVueStylePath = ( filePath: string, ext: string, index: number ): string => {
-    return replaceExt( filePath, `${index || ''}.${ext}` );
+    return replaceExt( filePath, `-rbv-vue${index || ''}.${ext}` );
 };
 
 function parseVue( filepath: string ): SFCDescriptorOutput {
@@ -98,22 +98,19 @@ export default async function( filepath: string ): Promise<void> {
     styles.forEach( ( style, index: number ) => {
         tasks.push(
             new Promise( ( resolve ) => {
-                const cssPath = getVueStylePath( filepath, style.lang ?? 'css', index );
                 let { content : source, scoped, lang } = style; //eslint-disable-line
-
+                const cssPath = getVueStylePath( filepath, lang ?? 'css', index );
                 if( scoped ) {
                     source = compileStyle( {
                         id : scopeId,
                         scoped : true,
+                        trim : true,
                         source,
-                        filename : cssPath,
-                        preprocessLang : lang
+                        filename : cssPath
                     } ).code;
                 }
-
                 writeFileSync( cssPath, source );
-
-                cs( cssPath ).then( resolve );//eslint-disable-line
+                compileStyles( cssPath ).then( resolve );//eslint-disable-line
             } )
         );
     } );

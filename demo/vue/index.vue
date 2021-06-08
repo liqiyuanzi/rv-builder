@@ -23,9 +23,12 @@
 </script>
 
 <style lang='less' scoped>
+    @import './index.less';
     .test{
-        height: '10px';
+        height: 10px;
         .b{
+            background: @black;
+            color: @currentColor;
             height:1px;
         }
     }
