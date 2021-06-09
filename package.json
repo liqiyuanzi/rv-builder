@@ -34,8 +34,7 @@
     "commander": "^7.2.0",
     "eslint": "^7.26.0",
     "fs-extra": "^10.0.0",
-    "hash-sum": "^2.0.0",
-    "vue-template-compiler": "^2.6.14"
+    "hash-sum": "^2.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.11",
@@ -53,5 +52,8 @@
     "less": "^4.1.1",
     "react": "^17.0.2",
     "typescript": "^4.2.4"
+  },
+  "peerDependencies": {
+    "vue-template-compiler": "2.5.22"
   }
 }
