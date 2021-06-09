@@ -1,4 +1,5 @@
 import watch from './watch';
+export declare const getEev: () => string;
 export declare function buildEsm(): Promise<void>;
 export declare function buildCjs(): Promise<void>;
 export declare function buildAmd(): Promise<void>;

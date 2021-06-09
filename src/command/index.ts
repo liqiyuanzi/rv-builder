@@ -19,6 +19,10 @@ const setEev = ( env: string ): void => {
     process.env.RF_BUILDER_ENV = env;
 };
 
+export const getEev = (): string => {
+    return process.env.RF_BUILDER_ENV || '';
+};
+
 async function build( src = SRC_DIR, dist = DIST_DIR ): Promise<void> {
     copySync( src, dist );
     return compileDir( dist );

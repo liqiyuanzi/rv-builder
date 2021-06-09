@@ -12,8 +12,6 @@ const shouldBuildAll = ( obj: Obj ): boolean => {
     return Object.keys( obj ).length === 0;
 };
 
-setAlias();
-
 program
     .option( '-w, --watch' )
     .option( '-e, --esm' )
@@ -26,5 +24,6 @@ program
         const supports = shouldBuildAll( options ) ? buildSupport : support;
         for( const type in supports ) {
             await supports[ type as keyof typeof supports ].call( null );//eslint-disable-line
+            setAlias();
         }
     } ).parse();
