@@ -2,7 +2,6 @@
 
 import Commander from 'commander';
 import { support, buildSupport } from './command';
-import setAlias from './alias';
 
 type Obj = { [ key in string ]: boolean };
 
@@ -24,6 +23,5 @@ program
         const supports = shouldBuildAll( options ) ? buildSupport : support;
         for( const type in supports ) {
             await supports[ type as keyof typeof supports ].call( null );//eslint-disable-line
-            setAlias();
         }
     } ).parse();

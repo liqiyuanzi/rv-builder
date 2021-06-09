@@ -1,4 +1,5 @@
 import { compileDir } from '../compiler';
+import setAlias from '../alias';
 import {
     SRC_DIR,
     DIST_DIR,
@@ -25,6 +26,7 @@ export const getEev = (): string => {
 
 async function build( src = SRC_DIR, dist = DIST_DIR ): Promise<void> {
     copySync( src, dist );
+    setAlias();
     return compileDir( dist );
 }
 
