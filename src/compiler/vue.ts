@@ -91,7 +91,8 @@ export default async function( filepath: string ): Promise<void> {
             }
 
             writeFileSync( jsPath, script );
-            compileJs( jsPath ).then( resolve );//eslint-disable-line
+            compileJs( jsPath );
+            resolve();
         } )
     );
 
@@ -117,5 +118,5 @@ export default async function( filepath: string ): Promise<void> {
 
     tasks.push( remove( filepath ) );
 
-    Promise.all( tasks );//eslint-disable-line
+    await Promise.all( tasks );//eslint-disable-line
 }

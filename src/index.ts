@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import Commander from 'commander';
-import { support } from './command';
+import { support, buildSupport } from './command';
 import setAlias from './alias';
 
 type Obj = { [ key in string ]: boolean };
@@ -22,8 +22,9 @@ program
     .option( '-c, --cjs' )
     .option( '-cl, --clean' )
     .option( '-h, --help' )
-    .action( ( options: Obj ) => {
-        for( const type in support ) {
-            ( shouldBuildAll( options ) || options[ type ] ) && support[ type as keyof typeof support ].call( null );
+    .action( async ( options: Obj ) => {
+        const supports = shouldBuildAll( options ) ? buildSupport : support;
+        for( const type in supports ) {
+            await supports[ type as keyof typeof supports ].call( null );//eslint-disable-line
         }
     } ).parse();

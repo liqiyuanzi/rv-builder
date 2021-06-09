@@ -1,13 +1,15 @@
-module.exports = function() {
+module.exports = function( api ) {
+    if( api ) {
+        api.cache.never();
+    }
     const { RF_BUILDER_ENV, RF_BUILDER_ALIAS } = process.env;
     const buildType = RF_BUILDER_ENV ;
-
     const plugins = [
         [
             '@babel/plugin-transform-runtime',
             {
                 corejs : false,
-                useESModules: buildType === 'esm',
+                useESModules : buildType === 'esm',
             },
         ],
         '@babel/plugin-transform-object-assign',
@@ -15,19 +17,17 @@ module.exports = function() {
 
     if( RF_BUILDER_ALIAS ) {
         let alias = {};
-        
-        try { 
-            alias = JSON.parse( RF_BUILDER_ALIAS )
+
+        try {
+            alias = JSON.parse( RF_BUILDER_ALIAS );
         } catch( err ) {
-            alias = {}
+            alias = {};
         }
 
         plugins.push( [
             'babel-plugin-module-resolver',
-            {
-              alias
-            },
-        ] )
+            { alias },
+        ] );
     }
 
     return {
@@ -45,12 +45,12 @@ module.exports = function() {
                     functional : false,
                 },
             ],
-            [ 
+            [
                 '@babel/preset-typescript',
                 {
-                    allExtensions: true,
-                    isTSX: true,
-                    allowNamespaces: true
+                    allExtensions : true,
+                    isTSX : true,
+                    allowNamespaces : true
                 }
             ]
         ],

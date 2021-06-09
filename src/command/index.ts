@@ -1,6 +1,17 @@
 import { compileDir } from '../compiler';
-import { SRC_DIR, DIST_DIR } from '../common/constant';
-import { copySync, existsSync, remove } from '../common';
+import {
+    SRC_DIR,
+    DIST_DIR,
+    ESM_SRC_DIR,
+    ESM_DIST_DIR,
+    CJS_SRC_DIR,
+    CJS_DIST_DIR,
+    UMD_SRC_DIR,
+    UMD_DIST_DIR,
+    AMD_SRC_DIR,
+    AMD_DIST_DIR
+} from '../common/constant';
+import { copySync, existsSync, removeSync } from '../common';
 import chalk from 'chalk';
 import watch from './watch';
 
@@ -8,35 +19,47 @@ const setEev = ( env: string ): void => {
     process.env.RF_BUILDER_ENV = env;
 };
 
-function build(): void {
-    copySync( SRC_DIR, DIST_DIR );
-    compileDir( DIST_DIR );// eslint-disable-line
+async function build( src = SRC_DIR, dist = DIST_DIR ): Promise<void> {
+    copySync( src, dist );
+    return compileDir( dist );
 }
 
-export function buildEsm(): void {
+export async function buildEsm(): Promise<void> {
     setEev( 'esm' );
-    build();
+    return build( ESM_SRC_DIR, ESM_DIST_DIR );
 }
 
-export function buildCjs(): void {
+export async function buildCjs(): Promise<void> {
     setEev( 'cjs' );
-    build();
+    return build( CJS_SRC_DIR, CJS_DIST_DIR );
 }
 
-export function buildAmd(): void {
+export async function buildAmd(): Promise<void> {
     setEev( 'amd' );
-    build();
+    return build( AMD_SRC_DIR, AMD_DIST_DIR );
 }
 
-export function buildUmd(): void {
+export async function buildUmd(): Promise<void> {
     setEev( 'umd' );
-    build();
+    return build( UMD_SRC_DIR, UMD_DIST_DIR );
 }
 
 export function clean(): void {
-    if( !existsSync( DIST_DIR ) ) return;
-
-    remove( DIST_DIR )// eslint-disable-line
+    if( existsSync( DIST_DIR ) ) {
+        removeSync( DIST_DIR );
+    }
+    if( existsSync( AMD_DIST_DIR ) ) {
+        removeSync( AMD_DIST_DIR );
+    }
+    if( existsSync( CJS_DIST_DIR ) ) {
+        removeSync( CJS_DIST_DIR );
+    }
+    if( existsSync( UMD_DIST_DIR ) ) {
+        removeSync( UMD_DIST_DIR );
+    }
+    if( existsSync( ESM_DIST_DIR ) ) {
+        removeSync( ESM_DIST_DIR );
+    }
 }
 
 export function showHelp(): void {
@@ -51,12 +74,15 @@ export function showHelp(): void {
     ` );
 }
 
-export const support = {
-    'watch' : watch,
+export const buildSupport = {
     'esm' : buildEsm,
     'cjs' : buildCjs,
     'amd' : buildAmd,
-    'umd' : buildUmd,
+    'umd' : buildUmd
+};
+
+export const support = Object.assign( {
+    'watch' : watch,
     'clean' : clean,
     'help' : showHelp
-};
+}, buildSupport );

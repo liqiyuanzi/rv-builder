@@ -8,10 +8,10 @@ export default async function( filepath: string ): Promise<void> {
         filename : filepath
     } )?.code;
     if( !result ) return;
-
     result = translateStyleImports( result );
     result = translateJsImports( result );
 
     removeSync( filepath );
     writeFileSync( replaceExt( filepath, '.js' ), result );
+    return Promise.resolve();
 }

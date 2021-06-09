@@ -1,3 +1,2 @@
 node_modules
-dist_test
-dist_demo
+dist_**
