@@ -6,6 +6,7 @@ module.exports = function( api ) {
     const buildType = RF_BUILDER_ENV ;
     const plugins = [
         [
+            '@babel/plugin-transform-runtime',
             {
                 corejs : false,
                 useESModules : buildType === 'esm',
