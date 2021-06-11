@@ -20,8 +20,8 @@ program
     .option( '-cl, --clean' )
     .option( '-h, --help' )
     .action( async ( options: Obj ) => {
-        const supports = shouldBuildAll( options ) ? buildSupport : support;
+        const supports = shouldBuildAll( options ) ? buildSupport : options;
         for( const type in supports ) {
-            await supports[ type as keyof typeof supports ].call( null );//eslint-disable-line
+            await support[ type as keyof typeof supports ].call( null );//eslint-disable-line
         }
     } ).parse();

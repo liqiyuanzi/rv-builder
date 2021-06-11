@@ -12,8 +12,8 @@ export const VUE_REGEXP = new RegExp( /\.vue$/ );
 export const JS_REGEXP = new RegExp( /\.(jsx|tsx|ts|js)$/ );
 export const STYLE_REGEXP = new RegExp( /\.(less|scss|styl)$/ );
 export const EXT_REGEXP = /\.\w+$/;
-export const STYLE_IMPOPRTS = /import\s+(?:"|')[^"']+\.(\w+)(?:"|')(?:$|;|\n)/g;
-export const JS_IMPOPRTS = /import\s+[^'"]+\s+from\s+(?:"|')(?:[^"']+)\.(\w+)("|')(?:$|;|\n)/g;
+export const STYLE_IMPOPRTS = /import\s+(?:"|')[^"']+(\.\w+)(?:"|')(?:$|;|\n)/g;
+export const JS_IMPOPRTS = /import\s+[^'"]+\s+from\s+(?:"|')(?:[^"']+)(\.\w+)("|')(?:$|;|\n)/g;
 
 export function isDef( v: any ) {// eslint-disable-line
     return v !== undefined && v !== null;
@@ -89,11 +89,11 @@ export function getFullPath( path: string ): string {
 }
 
 export function translateStyleImports( text: string ): string {
-    return text.replace( STYLE_IMPOPRTS, ( source, match ) => source.replace( match, 'css' ) );
+    return text.replace( STYLE_IMPOPRTS, ( source, match ) => source.replace( match, '.css' ) );
 }
 
 export function translateJsImports( text: string ): string {
-    return text.replace( JS_IMPOPRTS, ( source, str ) => source.replace( str, 'js' ) );
+    return text.replace( JS_IMPOPRTS, ( source, str ) => source.replace( str, '.js' ) );
 }
 
 export { copy, copySync, copyFile, readdirSync, readFileSync, remove, removeSync, join, hash, writeFileSync, parse, relative, existsSync, dirname };

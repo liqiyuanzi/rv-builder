@@ -10,6 +10,7 @@ module.exports = {
         'dist_demo/**/*.js',
         'dist_amd_demo/**/*.js',
         'dist_umd_demo/**/*.js',
+        'dist_umd_demo/*.js',
         'dist_cjs_demo/**/*.js',
         'dist_esm_demo/**/*.js',
         '**/**/*.tsx',

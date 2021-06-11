@@ -2,7 +2,7 @@ module.exports = {
     src : 'demo',
     dist : 'dist_demo',
     umd : {
-        dist : 'dist_esm_demo',
+        dist : 'dist_umd_demo',
     },
     cjs : {
         dist : 'dist_cjs_demo',
@@ -11,7 +11,7 @@ module.exports = {
         dist : 'dist_amd_demo',
     },
     esm : {
-        dist : 'dist_umd_demo',
+        dist : 'dist_esm_demo',
     },
     alias : {
         'test____str' : '"ccccccc"'
