@@ -2,16 +2,11 @@
     <div class="test">
         {{ value }}
         <span>{{xxx}}</span>
-        <test-component />
     </div>
 </template>
 
 <script>
-import TestComponent from './component.vue'
-export default {
-    components: {
-        TestComponent
-    },
+  export default {
     data() {
         return {
             value: 'test',
@@ -24,7 +19,7 @@ export default {
     methods: {
         test() {}
     }
-}
+  }
 </script>
 
 <style lang='less' scoped>

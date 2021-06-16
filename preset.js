@@ -4,12 +4,18 @@ module.exports = function( api ) {
     }
     const { RF_BUILDER_ENV, RF_BUILDER_ALIAS } = process.env;
     const buildType = RF_BUILDER_ENV ;
+
+    const shouldUseEsm = () => {
+        return buildType === 'esm' || buildType === 'umd';
+    };
+
     const plugins = [
         [
             '@babel/plugin-transform-runtime',
             {
                 corejs : false,
-                useESModules : buildType === 'esm',
+                helpers : true,
+                useESModules : shouldUseEsm(),
             },
         ],
         '@babel/plugin-transform-object-assign',
@@ -36,7 +42,7 @@ module.exports = function( api ) {
                 '@babel/preset-env',
                 {
                     loose : true,
-                    modules : buildType === 'esm' ? false : buildType,
+                    modules : shouldUseEsm() ? false : buildType,
                 },
             ],
             [

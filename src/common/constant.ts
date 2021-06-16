@@ -1,8 +1,12 @@
-import { getConfig, join, dirname, getFullPath } from './index';
+import { getConfig, join, dirname, getFullPath, getEev } from './index';
 export const BASE_FILE = 'rv.config';
 export const RENDER_FN = '__vue_render__';
 export const STATIC_RENDER_FN = '__vue_staticRenderFns__';
 const CWD = process.cwd();
+
+const getBaseConfig = ( dir = CWD ): string => {
+    return getFullPath( join( dir, BASE_FILE ) );
+};
 
 /* eslint-disable */
 const getRVConfig = (): any => {
@@ -14,8 +18,8 @@ const getRVConfig = (): any => {
 };
 /* eslint-enable */
 
-const getBaseConfig = ( dir = CWD ): string => {
-    return getFullPath( join( dir, BASE_FILE ) );
+export const getSourceDir = <T = string>( path: string ): T => {
+    return getConfig( getRVConfig(), path ); //eslint-disable-line
 };
 
 const getRootDir = ( dir: string ): string => {
@@ -31,18 +35,21 @@ const getRootDir = ( dir: string ): string => {
     return getRootDir( parentDir );
 };
 
-export const getSourceDir = <T = string>( path: string ): T => {
-    return getConfig( getRVConfig(), path ); //eslint-disable-line
-};
-
 export const ROOT_DIR = getRootDir( CWD );
 export const SRC_DIR = getSourceDir( 'src' );
 export const DIST_DIR = getSourceDir( 'dist' );
-export const ESM_SRC_DIR = getSourceDir( 'esm.src' ) || SRC_DIR;
-export const ESM_DIST_DIR = getSourceDir( 'esm.dist' ) || DIST_DIR;
-export const CJS_SRC_DIR = getSourceDir( 'cjs.src' ) || SRC_DIR;
-export const CJS_DIST_DIR = getSourceDir( 'cjs.dist' ) || DIST_DIR;
-export const UMD_SRC_DIR = getSourceDir( 'umd.src' ) || SRC_DIR;
-export const UMD_DIST_DIR = getSourceDir( 'umd.dist' ) || DIST_DIR;
-export const AMD_SRC_DIR = getSourceDir( 'amd.src' ) || SRC_DIR;
-export const AMD_DIST_DIR = getSourceDir( 'amd.dist' ) || DIST_DIR;
+
+export const translate = ( str: string ): string => {
+    if( !str ) return '';
+    const dirName = getSourceDir( getEev() ? getEev() + '.dist' : DIST_DIR );
+    return str.replace( /\[dist\]/g, dirName );
+};
+
+export const getSrcDir = ( type = getEev() ): string => {
+    return translate( getSourceDir( type + '.src' ) ) || SRC_DIR;
+};
+
+export const getDistDir = ( type = getEev() ): string => {
+    return translate( getSourceDir( type + '.dist' ) ) || DIST_DIR;
+};
+

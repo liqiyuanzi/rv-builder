@@ -67,7 +67,7 @@ export function getConfig( options: Obj, path: string ): any {// eslint-disable-
                 return undefined;
             }
             tmp = tmp[ item ];
-        } catch( e ) {// eslint-disable-line
+        } catch( e: unknown ) {
             return undefined;
         }
     }
@@ -95,5 +95,17 @@ export function translateStyleImports( text: string ): string {
 export function translateJsImports( text: string ): string {
     return text.replace( JS_IMPOPRTS, ( source, str ) => source.replace( str, '.js' ) );
 }
+
+export const setEev = ( env: string ): void => {
+    process.env.RF_BUILDER_ENV = env;
+};
+
+export const getEev = (): string => {
+    return process.env.RF_BUILDER_ENV ?? '';
+};
+
+export const errorHandler = ( err: Error ): void => {
+    console.log( err );
+};
 
 export { copy, copySync, copyFile, readdirSync, readFileSync, remove, removeSync, join, hash, writeFileSync, parse, relative, existsSync, dirname };

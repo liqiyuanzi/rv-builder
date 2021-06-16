@@ -1,6 +1,5 @@
 import { isObject } from '../common';
-import { getSourceDir, DIST_DIR } from '../common/constant';
-import { getEev } from '../command';
+import { getSourceDir, translate } from '../common/constant';
 
 type Alias = {
     [ key in string ]: string
@@ -8,11 +7,6 @@ type Alias = {
 
 const setAlias = ( config: string ): void => {
     process.env.RF_BUILDER_ALIAS = config;
-};
-
-const translate = ( str: string ): string => {
-    const dirName = getSourceDir( getEev() ? getEev() + '.dist' : DIST_DIR );
-    return str.replace( /\{dist_dir\}/g, dirName );
 };
 
 export default function alias(): void {

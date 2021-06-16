@@ -1,7 +1,7 @@
 import { parse, compileTemplate, SFCDescriptor, SFCBlock, compileStyle } from '@vue/component-compiler-utils';
 import { VueTemplateCompiler } from '@vue/component-compiler-utils/lib/types';
 import * as templateCompiler from 'vue-template-compiler';
-import { readFileSync, hash, replaceExt, writeFileSync, parse as parsePath, replace, remove } from '../common';
+import { readFileSync, hash, replaceExt, writeFileSync, parse as parsePath, replace, remove, errorHandler } from '../common';
 import { RENDER_FN, STATIC_RENDER_FN } from '../common/constant';
 import compileJs from './js';
 import compileStyles from './style';
@@ -91,8 +91,7 @@ export default async function( filepath: string ): Promise<void> {
             }
 
             writeFileSync( jsPath, script );
-            compileJs( jsPath );
-            resolve();
+            compileJs( jsPath ).then( resolve, errorHandler );
         } )
     );
 
@@ -111,7 +110,7 @@ export default async function( filepath: string ): Promise<void> {
                     } ).code;
                 }
                 writeFileSync( cssPath, source );
-                compileStyles( cssPath ).then( resolve );//eslint-disable-line
+                compileStyles( cssPath ).then( resolve, errorHandler );
             } )
         );
     } );

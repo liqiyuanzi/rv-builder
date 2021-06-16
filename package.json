@@ -32,9 +32,12 @@
     "chalk": "^4.1.1",
     "chokidar": "^3.5.1",
     "commander": "^7.2.0",
+    "css-loader": "^5.2.6",
     "eslint": "^7.26.0",
     "fs-extra": "^10.0.0",
-    "hash-sum": "^2.0.0"
+    "hash-sum": "^2.0.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.39.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.11",
@@ -52,7 +55,8 @@
     "less": "^4.1.1",
     "react": "^17.0.2",
     "typescript": "^4.2.4",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.6.14",
+    "webpack-cli": "^4.7.2"
   },
   "peerDependencies": {}
 }

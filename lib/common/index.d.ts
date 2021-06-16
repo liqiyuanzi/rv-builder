@@ -28,4 +28,7 @@ export declare function getConfig(options: Obj, path: string): any;
 export declare function getFullPath(path: string): string;
 export declare function translateStyleImports(text: string): string;
 export declare function translateJsImports(text: string): string;
+export declare const setEev: (env: string) => void;
+export declare const getEev: () => string;
+export declare const errorHandler: (err: Error) => void;
 export { copy, copySync, copyFile, readdirSync, readFileSync, remove, removeSync, join, hash, writeFileSync, parse, relative, existsSync, dirname };
