@@ -11,9 +11,10 @@ module.exports = {
         dist : 'dist_cjs_demo',
     },
     esm : {
-        dist : 'dist_esm_demo',
+        dist : 'dist_esm_demo'
     },
     alias : {
-        'test____str' : '"ccccccc"'
+        'test____str' : '"ccccccc"',
+        '@@component' : './'
     }
 };

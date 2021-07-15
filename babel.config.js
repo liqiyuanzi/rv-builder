@@ -14,6 +14,7 @@ module.exports = {
         'dist_cjs_demo/**/*.js',
         'dist_esm_demo/**/*.js',
         '**/**/*.tsx',
+        '**/**/*.ts',
         '**/**/*.jsx'
     ]
 };

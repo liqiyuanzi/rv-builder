@@ -46,6 +46,9 @@ module.exports = function( api ) {
                 },
             ],
             [
+                '@babel/preset-react',
+            ],
+            [
                 '@vue/babel-preset-jsx',
                 {
                     functional : false,
