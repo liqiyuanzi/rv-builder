@@ -20,7 +20,7 @@ export default async function bundle(): Promise<void> {
             dist : getDist(),
             minify : getConfig( 'minify' ),
             name : getConfig( 'name' ),
-            webpack : getConfig( 'webpack' )
+            webpack : getSourceDir( 'webpack' )
         } ), ( error, stats ) => {
             if( error ) {
                 console.log( 'webpack_error:', error );

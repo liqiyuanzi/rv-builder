@@ -11,7 +11,7 @@
     "rvb": "./lib/index.js"
   },
   "scripts": {
-    "demo": "yarn make && yarn clean:demo && yarn node lib/index.js --esm",
+    "demo": "yarn make && yarn clean:demo && yarn node lib/index.js --umd",
     "clean:demo": "rm -rf dist_demo dist_amd_demo dist_umd_demo dist_esm_demo dist_cjs_demo",
     "clean": "rm -rf lib",
     "make": "yarn clean && tsc --declaration",
