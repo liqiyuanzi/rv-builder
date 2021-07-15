@@ -39,7 +39,8 @@
     "fs-extra": "^10.0.0",
     "hash-sum": "^2.0.0",
     "style-loader": "^2.0.0",
-    "webpack": "^5.39.0"
+    "webpack": "^5.39.0",
+    "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.11",

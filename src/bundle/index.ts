@@ -19,7 +19,8 @@ export default async function bundle(): Promise<void> {
             entry,
             dist : getDist(),
             minify : getConfig( 'minify' ),
-            name : getConfig( 'name' )
+            name : getConfig( 'name' ),
+            webpack : getConfig( 'webpack' )
         } ), ( error, stats ) => {
             if( error ) {
                 console.log( 'webpack_error:', error );

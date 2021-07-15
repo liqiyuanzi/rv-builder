@@ -3,17 +3,20 @@ type Options = {
     minify: boolean;
     dist: string;
     name: string;
+    webpack: Configuration;
 };
 import { Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
 
 const config = ( options: Options ): Configuration => {
     const {
         entry,
         minify = false,
         dist : path,
-        name = 'main'
+        name = 'main',
+        webpack = {}
     } = options;
-    return {
+    return merge( {
         mode : 'production',
         entry : {
             [ name ] : entry
@@ -55,7 +58,7 @@ const config = ( options: Options ): Configuration => {
                 }
             ]
         }
-    };
+    }, webpack );
 };
 
 export default config;
