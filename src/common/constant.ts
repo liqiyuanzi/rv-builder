@@ -46,10 +46,10 @@ export const translate = ( str: string ): string => {
 };
 
 export const getSrcDir = ( type = getEev() ): string => {
-    return translate( getSourceDir( type + '.src' ) ) || SRC_DIR;
+    return join( CWD, translate( getSourceDir( type + '.src' ) ) || SRC_DIR );
 };
 
 export const getDistDir = ( type = getEev() ): string => {
-    return translate( getSourceDir( type + '.dist' ) ) || DIST_DIR;
+    return join( CWD, translate( getSourceDir( type + '.dist' ) ) || DIST_DIR );
 };
 
