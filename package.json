@@ -23,6 +23,7 @@
     "lint": "eslint src/**/*.ts test/**/*.ts --cache --fix "
   },
   "dependencies": {
+    "@babel/core": "^7.15.0",
     "@babel/plugin-transform-object-assign": "^7.12.13",
     "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
@@ -60,5 +61,8 @@
     "typescript": "^4.2.4",
     "webpack-cli": "^4.7.2"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "supports-color" : "*",
+    "vue": "*"
+  }
 }
