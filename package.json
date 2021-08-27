@@ -1,6 +1,6 @@
 {
   "name": "rv-builder",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "vue or react build tool",
   "main": "lib/index.js",
   "repository": "git@github.com:liqiyuanzi/rv-builder.git",
@@ -62,7 +62,7 @@
     "webpack-cli": "^4.7.2"
   },
   "peerDependencies": {
-    "supports-color" : "*",
+    "supports-color": "*",
     "vue": "*"
   }
 }
