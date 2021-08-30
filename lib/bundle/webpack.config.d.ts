@@ -1,3 +1,4 @@
+import { Configuration } from 'webpack';
 declare type Options = {
     entry: string;
     minify: boolean;
@@ -5,6 +6,5 @@ declare type Options = {
     name: string;
     webpack: Configuration;
 };
-import { Configuration } from 'webpack';
 declare const config: (options: Options) => Configuration;
 export default config;

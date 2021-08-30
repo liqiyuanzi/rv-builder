@@ -1,3 +1,6 @@
+
+import { Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
 type Options = {
     entry: string;
     minify: boolean;
@@ -5,8 +8,6 @@ type Options = {
     name: string;
     webpack: Configuration;
 };
-import { Configuration } from 'webpack';
-import { merge } from 'webpack-merge';
 
 const config = ( options: Options ): Configuration => {
     const {
@@ -17,6 +18,7 @@ const config = ( options: Options ): Configuration => {
         webpack = {}
     } = options;
     return merge( {
+        stats : 'detailed',
         mode : 'production',
         entry : {
             [ name ] : entry
@@ -37,6 +39,12 @@ const config = ( options: Options ): Configuration => {
         },
         module : {
             rules : [
+                {
+                    test : /\.m?js/,
+                    resolve : {
+                        fullySpecified : false
+                    }
+                },
                 {
                     test : /\.css$/,
                     use : [
