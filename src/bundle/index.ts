@@ -11,15 +11,24 @@ function getDist(): string {
     return join( ROOT_DIR, getConfig( 'dist' ) );
 }
 
-export default async function bundle(): Promise<void> {
+function getOutputName( minify: boolean, name: string ): string {
+    const suffix = minify ? '.min' : '';
+    return name + suffix + '.js';
+}
+
+export default async function bundle(): Promise<string | void> {
     const entry = translate( getConfig<string>( 'entry' ) );
     if( !entry ) return Promise.resolve();
+    const dist = getDist();
+    const minify = getConfig( 'minify' ) as boolean;
+    const name = getConfig( 'name' ) as string;
+    const outputName = getOutputName( minify, name );
     return new Promise( ( resolve ) => {
         webpack( config( {
             entry,
-            dist : getDist(),
-            minify : getConfig( 'minify' ),
-            name : getConfig( 'name' ),
+            dist,
+            minify,
+            name,
             webpack : getSourceDir( 'webpack' )
         } ), ( error, stats ) => {
             if( error ) {
@@ -28,8 +37,10 @@ export default async function bundle(): Promise<void> {
             console.log( stats?.toString( {
                 colors : true
             } ) );
+
+            resolve( outputName );
         } ).run( () => {
-            resolve();
+            // resolve( outputName );
         } );
     } );
 }

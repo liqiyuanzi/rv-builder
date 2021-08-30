@@ -1,1 +1,1 @@
-export default function bundle(): Promise<void>;
+export default function bundle(): Promise<string | void>;

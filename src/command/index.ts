@@ -6,7 +6,7 @@ import {
     getSrcDir,
     getDistDir
 } from '../common/constant';
-import { copySync, existsSync, removeSync, setEev } from '../common';
+import { copySync, existsSync, removeSync, setEev, join } from '../common';
 import chalk from 'chalk';
 import watch from './watch';
 
@@ -40,7 +40,20 @@ export async function buildCjs(): Promise<void> {
 
 export async function buildUmd(): Promise<void> {
     setEev( 'umd' );
-    return build().then( bundle );
+    return build().then( bundle ).then( ( outputName: string | void ) => {
+        if( !outputName ) return;
+
+        const dist = getDistDir( 'umd' );
+        const tmp = '__rvb__tmp.js';
+        const path = join( dist, outputName );
+        const tmpDist = join( dist, '../', tmp );
+        if( !existsSync( path ) ) return;
+
+        copySync( path, tmpDist );
+        removeSync( dist );
+        copySync( tmpDist, path );
+        removeSync( tmpDist );
+    } );
 }
 
 export function clean(): void {
